@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mangoes - Sign In</title>
+    <title>Mangoes - Sign Up</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         * {
@@ -20,6 +20,7 @@
             align-items: center;
             justify-content: center;
             position: relative;
+            overflow: hidden;
         }
 
         /* Background overlay with cake image effect */
@@ -45,7 +46,7 @@
             50% { transform: translateY(-10px) rotate(2deg); }
         }
 
-        .login-container {
+        .register-container {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
             border-radius: 24px;
@@ -70,19 +71,19 @@
             letter-spacing: -0.5px;
         }
 
-        .login-title {
+        .register-title {
             text-align: center;
             margin-bottom: 10px;
         }
 
-        .login-title h2 {
+        .register-title h2 {
             font-size: 32px;
             color: #333;
             font-weight: 700;
             margin-bottom: 8px;
         }
 
-        .login-subtitle {
+        .register-subtitle {
             text-align: center;
             color: #666;
             font-size: 14px;
@@ -114,26 +115,21 @@
             color: #999;
         }
 
-        .forgot-password {
-            text-align: right;
-            margin-bottom: 25px;
+        .invalid-feedback {
+            color: #dc3545;
+            font-size: 12px;
+            margin-top: 5px;
+            display: block;
         }
 
-        .forgot-password a {
-            color: #8B4513;
-            text-decoration: none;
-            font-size: 14px;
-            transition: color 0.3s ease;
+        .form-control.is-invalid {
+            border-color: #dc3545;
         }
 
-        .forgot-password a:hover {
-            color: #5D2F0A;
-        }
-
-        .btn-login {
+        .btn-register {
             width: 100%;
             padding: 16px;
-            background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
+            background: linear-gradient(135deg, #8B1538 0%, #B91C3C 100%);
             color: white;
             border: none;
             border-radius: 12px;
@@ -143,28 +139,29 @@
             transition: all 0.3s ease;
             text-transform: uppercase;
             letter-spacing: 0.5px;
+            margin-top: 10px;
         }
 
-        .btn-login:hover {
-            background: linear-gradient(135deg, #5D2F0A 0%, #8B4513 100%);
+        .btn-register:hover {
+            background: linear-gradient(135deg, #5D0A20 0%, #8B1538 100%);
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(139, 69, 19, 0.3);
+            box-shadow: 0 8px 25px rgba(139, 21, 56, 0.3);
         }
 
-        .signup-link {
+        .signin-link {
             text-align: center;
             margin: 25px 0;
             color: #666;
             font-size: 14px;
         }
 
-        .signup-link a {
-            color: #8B4513;
+        .signin-link a {
+            color: #8B1538;
             text-decoration: none;
             font-weight: 600;
         }
 
-        .signup-link a:hover {
+        .signin-link a:hover {
             text-decoration: underline;
         }
 
@@ -192,8 +189,8 @@
 
         .social-btn:hover {
             background: #f8f9fa;
-            border-color: #8B4513;
-            color: #8B4513;
+            border-color: #8B1538;
+            color: #8B1538;
             transform: translateY(-2px);
         }
 
@@ -203,12 +200,12 @@
 
         /* Responsive design */
         @media (max-width: 480px) {
-            .login-container {
+            .register-container {
                 margin: 20px;
                 padding: 30px 25px;
             }
             
-            .login-title h2 {
+            .register-title h2 {
                 font-size: 28px;
             }
         }
@@ -222,25 +219,52 @@
         }
 
         .cake-1 {
-            top: 10%;
-            left: 10%;
-            font-size: 60px;
-            animation: float 15s ease-in-out infinite;
+            top: 15%;
+            left: 8%;
+            font-size: 70px;
+            animation: float 16s ease-in-out infinite;
         }
 
         .cake-2 {
-            top: 70%;
-            right: 15%;
-            font-size: 50px;
-            animation: float 18s ease-in-out infinite reverse;
+            top: 60%;
+            right: 12%;
+            font-size: 55px;
+            animation: float 19s ease-in-out infinite reverse;
         }
 
         .cake-3 {
-            bottom: 20%;
-            left: 20%;
-            font-size: 40px;
-            animation: float 22s ease-in-out infinite;
+            bottom: 25%;
+            left: 15%;
+            font-size: 45px;
+            animation: float 23s ease-in-out infinite;
         }
+
+        .cake-4 {
+            top: 30%;
+            right: 25%;
+            font-size: 35px;
+            animation: float 17s ease-in-out infinite reverse;
+        }
+
+        /* Password strength indicator */
+        .password-strength {
+            margin-top: 5px;
+            height: 3px;
+            border-radius: 2px;
+            background: #e1e5e9;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .password-strength-bar {
+            height: 100%;
+            transition: all 0.3s ease;
+            border-radius: 2px;
+        }
+
+        .strength-weak { background: #dc3545; width: 33%; }
+        .strength-medium { background: #ffc107; width: 66%; }
+        .strength-strong { background: #28a745; width: 100%; }
     </style>
 </head>
 <body>
@@ -248,23 +272,40 @@
     <div class="cake-float cake-1">🍰</div>
     <div class="cake-float cake-2">🧁</div>
     <div class="cake-float cake-3">🎂</div>
+    <div class="cake-float cake-4">🍪</div>
 
-    <div class="login-container">
+    <div class="register-container">
         <div class="logo">
-            <h1>MANGOOS.</h1>
+            <h1>Mangoes.</h1>
         </div>
         
-        <div class="login-title">
-            <h2>Sign In</h2>
+        <div class="register-title">
+            <h2>Sign Up</h2>
         </div>
         
-        <div class="login-subtitle">
-            Login to Your Account
+        <div class="register-subtitle">
+            Create your account
         </div>
 
-        <form method="POST" action="{{ route('login.submit') }}">
+        <form method="POST" action="{{ route('register') }}">
             @csrf
             
+            <div class="form-group">
+                <input type="text" 
+                       class="form-control @error('name') is-invalid @enderror" 
+                       name="name" 
+                       value="{{ old('name') }}" 
+                       placeholder="Username" 
+                       required 
+                       autocomplete="name" 
+                       autofocus>
+                @error('name')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
+
             <div class="form-group">
                 <input type="email" 
                        class="form-control @error('email') is-invalid @enderror" 
@@ -272,8 +313,7 @@
                        value="{{ old('email') }}" 
                        placeholder="Email" 
                        required 
-                       autocomplete="email" 
-                       autofocus>
+                       autocomplete="email">
                 @error('email')
                     <div class="invalid-feedback">
                         {{ $message }}
@@ -287,7 +327,11 @@
                        name="password" 
                        placeholder="Password" 
                        required 
-                       autocomplete="current-password">
+                       autocomplete="new-password"
+                       id="password">
+                <div class="password-strength" id="passwordStrength">
+                    <div class="password-strength-bar" id="passwordStrengthBar"></div>
+                </div>
                 @error('password')
                     <div class="invalid-feedback">
                         {{ $message }}
@@ -295,22 +339,23 @@
                 @enderror
             </div>
 
-            <div class="forgot-password">
-                @if (Route::has('password.request'))
-                    <a href="{{ route('password.request') }}">Forgot Password ?</a>
-                @endif
+            <div class="form-group">
+                <input type="password" 
+                       class="form-control" 
+                       name="password_confirmation" 
+                       placeholder="Confirm Password" 
+                       required 
+                       autocomplete="new-password">
             </div>
 
-            <button type="submit" class="btn-login">
-                Login
+            <button type="submit" class="btn-register">
+                Register
             </button>
         </form>
 
-        <div class="signup-link">
-            Don't have an account? 
-            @if (Route::has('register'))
-                <a href="{{ route('register') }}">Sign Up</a>
-            @endif
+        <div class="signin-link">
+            Already have an account? 
+            <a href="{{ route('login') }}">Sign In</a>
         </div>
 
         <div class="social-login">
@@ -330,10 +375,12 @@
     </div>
 
     <script>
-        // Add some interactive effects
         document.addEventListener('DOMContentLoaded', function() {
             const formControls = document.querySelectorAll('.form-control');
+            const passwordInput = document.getElementById('password');
+            const strengthBar = document.getElementById('passwordStrengthBar');
             
+            // Form control animations
             formControls.forEach(control => {
                 control.addEventListener('focus', function() {
                     this.parentElement.style.transform = 'translateY(-2px)';
@@ -344,8 +391,40 @@
                 });
             });
 
-            // Add floating animation to login container
-            const container = document.querySelector('.login-container');
+            // Password strength checker
+            if (passwordInput) {
+                passwordInput.addEventListener('input', function() {
+                    const password = this.value;
+                    const strength = checkPasswordStrength(password);
+                    
+                    strengthBar.className = 'password-strength-bar';
+                    
+                    if (password.length > 0) {
+                        if (strength < 3) {
+                            strengthBar.classList.add('strength-weak');
+                        } else if (strength < 5) {
+                            strengthBar.classList.add('strength-medium');
+                        } else {
+                            strengthBar.classList.add('strength-strong');
+                        }
+                    }
+                });
+            }
+
+            function checkPasswordStrength(password) {
+                let strength = 0;
+                
+                if (password.length >= 8) strength++;
+                if (/[a-z]/.test(password)) strength++;
+                if (/[A-Z]/.test(password)) strength++;
+                if (/[0-9]/.test(password)) strength++;
+                if (/[^A-Za-z0-9]/.test(password)) strength++;
+                
+                return strength;
+            }
+
+            // Add floating animation to register container
+            const container = document.querySelector('.register-container');
             let mouseX = 0;
             let mouseY = 0;
             
