@@ -5,83 +5,105 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Cake;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class CakeController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Menampilkan daftar semua kue.
      */
     public function index()
     {
-        //
+        $cakes = Cake::latest()->paginate(10);
+        return view('admin.cakes.index', compact('cakes'));
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Menampilkan form untuk membuat kue baru.
      */
     public function create()
     {
-        //
+        return view('admin.cakes.create');
     }
 
+    /**
+     * Menyimpan kue baru ke database. (CREATE)
+     */
     public function store(Request $request)
     {
-        // 1. Validasi input dari form
         $request->validate([
             'nama_kue' => 'required|string|max:255',
             'harga_kue' => 'required|numeric|min:0',
-            'gambar_kue' => 'required|image|mimes:jpeg,png,jpg|max:2048', // Validasi file gambar
+            'gambar_kue' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        // 2. Proses upload file gambar
-        $path = null;
-        if ($request->hasFile('gambar_kue')) {
-            // Simpan gambar ke folder 'public/kue' dan dapatkan path-nya
-            // Laravel akan otomatis membuat folder 'kue' jika belum ada
-            $path = $request->file('gambar_kue')->store('public/kue');
-        }
+        // Simpan gambar ke folder 'kue' di dalam disk 'public'
+        // Ini akan menyimpan file fisik di: storage/app/public/kue
+        $path = $request->file('gambar_kue')->store('kue', 'public');
 
-        // 3. Simpan data ke database, termasuk path gambar
         Cake::create([
             'nama_kue' => $request->nama_kue,
             'harga_kue' => $request->harga_kue,
-            'gambar_kue' => $path, 
+            'gambar_kue' => $path, // Path yang tersimpan sekarang adalah 'kue/namafile.jpg'
         ]);
 
-        // 4. Redirect kembali dengan pesan sukses
         return redirect()->route('admin.datakue.index')
-                        ->with('success', 'Kue baru berhasil ditambahkan.');
+                         ->with('success', 'Kue baru berhasil ditambahkan.');
     }
 
     /**
-     * Display the specified resource.
+     * Menampilkan form untuk mengedit kue.
      */
-    public function show(Cake $cake)
+    public function edit(Cake $datakue)
     {
-        //
+        return view('admin.cakes.edit', ['cake' => $datakue]);
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Memperbarui data kue di database. (UPDATE)
      */
-    public function edit(Cake $cake)
+    public function update(Request $request, Cake $datakue)
     {
-        //
+        $request->validate([
+            'nama_kue' => 'required|string|max:255',
+            'harga_kue' => 'required|numeric|min:0',
+            'gambar_kue' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        $path = $datakue->gambar_kue;
+
+        if ($request->hasFile('gambar_kue')) {
+            // Hapus gambar lama dari disk 'public'
+            if ($datakue->gambar_kue) {
+                Storage::disk('public')->delete($datakue->gambar_kue);
+            }
+            // Upload gambar baru ke disk 'public'
+            $path = $request->file('gambar_kue')->store('kue', 'public');
+        }
+
+        $datakue->update([
+            'nama_kue' => $request->nama_kue,
+            'harga_kue' => $request->harga_kue,
+            'gambar_kue' => $path,
+        ]);
+
+        return redirect()->route('admin.datakue.index')
+                         ->with('success', 'Data kue berhasil diperbarui.');
     }
 
     /**
-     * Update the specified resource in storage.
+     * Menghapus data kue dari database. (DELETE)
      */
-    public function update(Request $request, Cake $cake)
+    public function destroy(Cake $datakue)
     {
-        //
-    }
+        // Hapus file gambar dari disk 'public'
+        if ($datakue->gambar_kue) {
+            Storage::disk('public')->delete($datakue->gambar_kue);
+        }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Cake $cake)
-    {
-        //
+        $datakue->delete();
+
+        return redirect()->route('admin.datakue.index')
+                         ->with('success', 'Kue berhasil dihapus.');
     }
 }

@@ -5,6 +5,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 // Controller yang sudah ada
 use App\Http\Controllers\Admin\AdminDashboardController;
+use App\Http\Controllers\Admin\CakeController;
 use App\Http\Controllers\User\CustomerDashboardController;
 
 // --- GRUP UNTUK PENGGUNA YANG BELUM LOGIN (GUEST) ---
@@ -24,11 +25,10 @@ Route::middleware('auth')->group(function () {
         // Rute untuk Dashboard (ini sudah benar karena Controller-nya ada)
         Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
 
-        // Rute untuk Data Kue (SOLUSI SEMENTARA)
-        // Gunakan fungsi langsung untuk menampilkan view, tanpa perlu Controller.
-        Route::get('/data-kue', function () {
-            return view('admin.dataKue'); // Pastikan file view ini ada
-        })->name('datakue');
+        // Route untuk CRUD Kue (Data Kue)
+        // Route::resource akan otomatis membuat route untuk:
+        // index, create, store, show, edit, update, destroy
+        Route::resource('datakue', CakeController::class);
 
         // Rute untuk Data Pesanan (SOLUSI SEMENTARA)
         // Gunakan fungsi langsung untuk menampilkan view, tanpa perlu Controller.
