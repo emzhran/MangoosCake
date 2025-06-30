@@ -20,9 +20,10 @@
             align-items: center;
             justify-content: center;
             position: relative;
+            overflow: hidden;
+            background-color: #fcece5;
         }
 
-        /* Background overlay with cake image effect */
         body::before {
             content: '';
             position: absolute;
@@ -31,11 +32,11 @@
             right: 0;
             bottom: 0;
             background: linear-gradient(45deg, 
-                rgba(139, 69, 19, 0.1) 0%,
-                rgba(218, 165, 32, 0.1) 25%,
-                rgba(255, 99, 71, 0.1) 50%,
-                rgba(210, 105, 30, 0.1) 75%,
-                rgba(178, 34, 34, 0.1) 100%);
+                rgba(139, 69, 19, 0.05) 0%,
+                rgba(218, 165, 32, 0.05) 25%,
+                rgba(255, 99, 71, 0.05) 50%,
+                rgba(210, 105, 30, 0.05) 75%,
+                rgba(178, 34, 34, 0.05) 100%);
             background-size: 200px 200px;
             animation: float 20s ease-in-out infinite;
         }
@@ -49,25 +50,53 @@
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
             border-radius: 24px;
-            padding: 40px;
             width: 100%;
-            max-width: 400px;
+            max-width: 800px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
             position: relative;
             z-index: 1;
             border: 1px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            overflow: hidden;
         }
+
+        .login-form-section {
+            padding: 40px;
+            flex-basis: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .login-image-section {
+            flex-basis: 50%;
+            background: #FFF8E1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .login-image-section img {
+            display: block;
+            width: 98%;
+            height: 98%;
+            /* object-fit: cover; */
+            transition: transform 0.3s ease-in-out;
+        }
+        
+       
 
         .logo {
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
 
-        .logo h1 {
-            font-size: 28px;
-            color: #8B4513;
-            font-weight: 700;
-            letter-spacing: -0.5px;
+        /* === CSS UNTUK UKURAN LOGO DITAMBAHKAN DI SINI === */
+        .logo img {
+            height: 45px; /* Atur tinggi logo di sini */
+            width: auto;  /* Biarkan lebar menyesuaikan agar tidak gepeng */
+            max-width: 100%;
         }
 
         .login-title {
@@ -86,7 +115,7 @@
             text-align: center;
             color: #666;
             font-size: 14px;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
         }
 
         .form-group {
@@ -133,7 +162,7 @@
         .btn-login {
             width: 100%;
             padding: 16px;
-            background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
+            background: linear-gradient(135deg, #960000, #c00000);
             color: white;
             border: none;
             border-radius: 12px;
@@ -146,9 +175,8 @@
         }
 
         .btn-login:hover {
-            background: linear-gradient(135deg, #5D2F0A 0%, #8B4513 100%);
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(139, 69, 19, 0.3);
+            box-shadow: 0 8px 25px rgba(150, 0, 0, 0.3);
         }
 
         .signup-link {
@@ -172,7 +200,6 @@
             display: flex;
             justify-content: center;
             gap: 15px;
-            margin-top: 25px;
         }
 
         .social-btn {
@@ -200,162 +227,122 @@
         .social-btn i {
             font-size: 18px;
         }
-
-        /* Responsive design */
-        @media (max-width: 480px) {
-            .login-container {
-                margin: 20px;
-                padding: 30px 25px;
-            }
-            
-            .login-title h2 {
-                font-size: 28px;
-            }
-        }
-
-        /* Floating cake elements */
+        
         .cake-float {
             position: absolute;
             opacity: 0.1;
             pointer-events: none;
             z-index: 0;
-        }
-
-        .cake-1 {
-            top: 10%;
-            left: 10%;
             font-size: 60px;
             animation: float 15s ease-in-out infinite;
         }
 
-        .cake-2 {
-            top: 70%;
-            right: 15%;
-            font-size: 50px;
-            animation: float 18s ease-in-out infinite reverse;
-        }
+        .cake-1 { top: 10%; left: 10%; }
+        .cake-2 { top: 70%; right: 15%; font-size: 50px; animation-direction: reverse; animation-duration: 18s; }
+        .cake-3 { bottom: 20%; left: 20%; font-size: 40px; animation-duration: 22s; }
 
-        .cake-3 {
-            bottom: 20%;
-            left: 20%;
-            font-size: 40px;
-            animation: float 22s ease-in-out infinite;
+        @media (max-width: 768px) {
+            .login-container {
+                flex-direction: column;
+                max-width: 400px;
+                margin: 20px;
+            }
+            .login-image-section {
+                display: none;
+            }
+            .login-form-section {
+                flex-basis: 100%;
+                padding: 30px 25px;
+            }
+            .login-title h2 {
+                font-size: 28px;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Floating cake decorations -->
     <div class="cake-float cake-1">🍰</div>
     <div class="cake-float cake-2">🧁</div>
     <div class="cake-float cake-3">🎂</div>
 
     <div class="login-container">
-        <div class="logo">
-            <h1>MANGOOS.</h1>
-        </div>
-        
-        <div class="login-title">
-            <h2>Sign In</h2>
-        </div>
-        
-        <div class="login-subtitle">
-            Login to Your Account
-        </div>
-
-        <form method="POST" action="{{ route('login.submit') }}">
-            @csrf
+        <div class="login-form-section">
+            <div class="logo">
+                <img src="{{ asset('assets/logo.png') }}" alt="Mangoos Logo">
+            </div>
             
-            <div class="form-group">
-                <input type="email" 
-                       class="form-control @error('email') is-invalid @enderror" 
-                       name="email" 
-                       value="{{ old('email') }}" 
-                       placeholder="Email" 
-                       required 
-                       autocomplete="email" 
-                       autofocus>
-                @error('email')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
-                @enderror
+            <div class="login-title">
+                <h2>Sign In</h2>
+            </div>
+            
+            <div class="login-subtitle">
+                Login to Your Account
             </div>
 
-            <div class="form-group">
-                <input type="password" 
-                       class="form-control @error('password') is-invalid @enderror" 
-                       name="password" 
-                       placeholder="Password" 
-                       required 
-                       autocomplete="current-password">
-                @error('password')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
-                @enderror
-            </div>
+            <form method="POST" action="{{ route('login.submit') }}">
+                @csrf
+                
+                <div class="form-group">
+                    <input type="email" 
+                           class="form-control @error('email') is-invalid @enderror" 
+                           name="email" 
+                           value="{{ old('email') }}" 
+                           placeholder="Email" 
+                           required 
+                           autocomplete="email" 
+                           autofocus>
+                    @error('email')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
 
-            <div class="forgot-password">
-                @if (Route::has('password.request'))
-                    <a href="{{ route('password.request') }}">Forgot Password ?</a>
+                <div class="form-group">
+                    <input type="password" 
+                           class="form-control @error('password') is-invalid @enderror" 
+                           name="password" 
+                           placeholder="Password" 
+                           required 
+                           autocomplete="current-password">
+                    @error('password')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="forgot-password">
+                    @if (Route::has('password.request'))
+                        <a href="{{ route('password.request') }}">Forgot Password?</a>
+                    @endif
+                </div>
+
+                <button type="submit" class="btn-login">Login</button>
+            </form>
+
+            <div class="signup-link">
+                Don't have an account? 
+                @if (Route::has('register'))
+                    <a href="{{ route('register') }}">Sign Up</a>
                 @endif
             </div>
 
-            <button type="submit" class="btn-login">
-                Login
-            </button>
-        </form>
-
-        <div class="signup-link">
-            Don't have an account? 
-            @if (Route::has('register'))
-                <a href="{{ route('register') }}">Sign Up</a>
-            @endif
+            <div class="social-login">
+                <a href="#" class="social-btn">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="#" class="social-btn">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="#" class="social-btn">
+                    <i class="fab fa-youtube"></i>
+                </a>
+                <a href="#" class="social-btn">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+            </div>
         </div>
-
-        <div class="social-login">
-            <a href="#" class="social-btn">
-                <i class="fab fa-twitter"></i>
-            </a>
-            <a href="#" class="social-btn">
-                <i class="fab fa-instagram"></i>
-            </a>
-            <a href="#" class="social-btn">
-                <i class="fab fa-youtube"></i>
-            </a>
-            <a href="#" class="social-btn">
-                <i class="fab fa-linkedin"></i>
-            </a>
+        
+        <div class="login-image-section">
+            <img src="{{ asset('assets/Maskgroup.png') }}" alt="Mango Illustration">
         </div>
     </div>
-
-    <script>
-        // Add some interactive effects
-        document.addEventListener('DOMContentLoaded', function() {
-            const formControls = document.querySelectorAll('.form-control');
-            
-            formControls.forEach(control => {
-                control.addEventListener('focus', function() {
-                    this.parentElement.style.transform = 'translateY(-2px)';
-                });
-                
-                control.addEventListener('blur', function() {
-                    this.parentElement.style.transform = 'translateY(0)';
-                });
-            });
-
-            // Add floating animation to login container
-            const container = document.querySelector('.login-container');
-            let mouseX = 0;
-            let mouseY = 0;
-            
-            document.addEventListener('mousemove', function(e) {
-                mouseX = (e.clientX / window.innerWidth - 0.5) * 20;
-                mouseY = (e.clientY / window.innerHeight - 0.5) * 20;
-                
-                container.style.transform = `translate(${mouseX * 0.1}px, ${mouseY * 0.1}px)`;
-            });
-        });
-    </script>
 </body>
 </html>

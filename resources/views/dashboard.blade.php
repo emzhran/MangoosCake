@@ -395,25 +395,6 @@
         </div>
     </section>
 
-    <!-- CATEGORIES -->
-    <section id="product">
-        <h2 class="section-title">Choose Your Favorite</h2>
-        <div class="category-cards">
-            <div class="category-card">
-                <img src="{{ asset('assets/card-1.png') }}" alt="Cakes">
-                <p>Cakes</p>
-            </div>
-            <div class="category-card">
-                <img src="{{ asset('assets/card-2.png') }}" alt="Dry Cake">
-                <p>Dry Cake</p>
-            </div>
-            <div class="category-card">
-                <img src="{{ asset('assets/card-3.png') }}" alt="Cookies">
-                <p>Cookies</p>
-            </div>
-        </div>
-    </section>
-
     <!-- COLLECTIONS -->
     <section>
         <h2 class="section-title">Our Collections</h2>
