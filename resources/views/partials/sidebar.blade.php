@@ -24,7 +24,7 @@
                    class="nav-link flex items-center px-4 py-3 rounded-lg hover:bg-yellow-400 hover:text-white
                           {{ request()->routeIs('admin.datakue') ? 'bg-yellow-500 text-white font-semibold' : 'text-gray-700' }}">
                     <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 15.546c-.523 0-1.046.151-1.5.454a2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0c-.454-.303-.977-.454-1.5-.454V5.118a2.5 2.5 0 012.5-2.5h10a2.5 2.5 0 012.5 2.5v10.428zM5.121 14.121A2.5 2.5 0 017.5 13h9a2.5 2.5 0 012.379 1.121M9 10a1 1 0 11-2 0 1 1 0 012 0zm6 0a1 1 0 11-2 0 1 1 0 012 0z"></path></svg>
-                    <span>Data Pesanan</span>
+                    <span>Data Kue</span>
                 </a>
             </li>
             <!-- {{-- Item Menu: Data Pesanan --}}
@@ -43,7 +43,7 @@
                    class="nav-link flex items-center px-4 py-3 rounded-lg hover:bg-yellow-400 hover:text-white
                           {{ request()->routeIs('admin.datapesanan') ? 'bg-yellow-500 text-white font-semibold' : 'text-gray-700' }}">
                     <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 15.546c-.523 0-1.046.151-1.5.454a2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0c-.454-.303-.977-.454-1.5-.454V5.118a2.5 2.5 0 012.5-2.5h10a2.5 2.5 0 012.5 2.5v10.428zM5.121 14.121A2.5 2.5 0 017.5 13h9a2.5 2.5 0 012.379 1.121M9 10a1 1 0 11-2 0 1 1 0 012 0zm6 0a1 1 0 11-2 0 1 1 0 012 0z"></path></svg>
-                    <span>Data Kue</span>
+                    <span>Data Pesanan</span>
                 </a>
             </li>
         </ul>
