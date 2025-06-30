@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth; // <-- WAJIB di-import
-use Illuminate\Http\RedirectResponse; // <-- WAJIB di-import
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\RedirectResponse;
 
 class LoginController extends Controller
 {
@@ -35,14 +35,20 @@ class LoginController extends Controller
             // 3. Cek peran pengguna dan arahkan
             $user = Auth::user();
             if ($user->role === 'admin') {
-                return redirect()->intended(route('admin.dashboardAdmin'));
+                // --- DIUBAH ---
+                // Menggunakan nama route yang benar: 'admin.dashboard'
+                return redirect()->intended(route('admin.dashboard'));
             }
 
-            if ($user->role === 'user') {
-                return redirect()->intended(route('user.dashboardAdmin'));
+            // Di file route Anda, rolenya adalah 'customer', bukan 'user'
+            if ($user->role === 'customer') { 
+                // --- DIUBAH ---
+                // Menggunakan nama route yang benar: 'customer.dashboard'
+                return redirect()->intended(route('customer.dashboard'));
             }
 
-            // Fallback jika peran tidak terdefinisi (seharusnya tidak terjadi)
+            // Fallback jika peran tidak terdefinisi (sebagai pengaman)
+            Auth::logout();
             return redirect('/');
         }
 
