@@ -3,10 +3,11 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
-// Controller yang sudah ada
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\CakeController;
 use App\Http\Controllers\User\CustomerDashboardController;
+use App\Http\Controllers\Admin\AdminOrderController;
+use App\Http\Controllers\User\CustomerOrderController;
 
 // --- GRUP UNTUK PENGGUNA YANG BELUM LOGIN (GUEST) ---
 Route::middleware('guest')->group(function () {
@@ -22,23 +23,20 @@ Route::middleware('auth')->group(function () {
 
     // --- GRUP UNTUK ADMIN ---
     Route::middleware('role:admin')->prefix('admin')->name('admin.')->group(function () {
-        // Rute untuk Dashboard (ini sudah benar karena Controller-nya ada)
+        // Rute untuk Dashboard
         Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
 
         // Route untuk CRUD Kue (Data Kue)
-        // Route::resource akan otomatis membuat route untuk:
-        // index, create, store, show, edit, update, destroy
         Route::resource('datakue', CakeController::class);
 
-        // Rute untuk Data Pesanan (SOLUSI SEMENTARA)
-        // Gunakan fungsi langsung untuk menampilkan view, tanpa perlu Controller.
-        Route::get('/data-pesanan', function () {
-            return view('admin.dataPesanan'); // Pastikan file view ini ada
-        })->name('datapesanan');
+        Route::resource('data-pemesanan', AdminOrderController::class)->except(['create', 'store']);
     });
 
-    // --- GRUP UNTUK CUSTOMER ---
     Route::middleware('role:customer')->prefix('customer')->name('customer.')->group(function () {
         Route::get('/dashboard', [CustomerDashboardController::class, 'index'])->name('dashboard');
+        
+        // Route::get('/order/create/{cake}', [CustomerOrderController::class, 'create'])->name('order.create');
+        // Route::post('/order', [CustomerOrderController::class, 'store'])->name('order.store');
+        // Route::get('/my-orders', [CustomerOrderController::class, 'index'])->name('orders.index');
     });
 });
