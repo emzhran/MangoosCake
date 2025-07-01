@@ -13,7 +13,12 @@ use App\Http\Controllers\User\CustomerOrderController;
 Route::middleware('guest')->group(function () {
     Route::get('/', [LoginController::class, 'showLoginForm'])->name('login');
     Route::post('/login', [LoginController::class, 'login'])->name('login.submit');
+
+    // Rute untuk menampilkan form (sudah ada)
     Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
+
+    // Rute untuk memproses form (INI YANG PERLU ANDA TAMBAHKAN)
+    Route::post('/register', [RegisterController::class, 'register'])->name('register.submit');
 });
 
 
@@ -30,13 +35,20 @@ Route::middleware('auth')->group(function () {
         Route::resource('datakue', CakeController::class);
 
         Route::resource('data-pemesanan', AdminOrderController::class)->except(['create', 'store']);
+
+        Route::post('data-pemesanan/{order}/approve', [AdminOrderController::class, 'approve'])->name('data-pemesanan.approve');
+        Route::post('data-pemesanan/{order}/reject', [AdminOrderController::class, 'reject'])->name('data-pemesanan.reject');
     });
 
     Route::middleware('role:customer')->prefix('customer')->name('customer.')->group(function () {
         Route::get('/dashboard', [CustomerDashboardController::class, 'index'])->name('dashboard');
         
-        // Route::get('/order/create/{cake}', [CustomerOrderController::class, 'create'])->name('order.create');
+        // AKTIFKAN (UNCOMMENT) BARIS DI BAWAH INI
+        Route::get('/order/create/{cake}', [CustomerOrderController::class, 'create'])->name('order.create');
+
         // Route::post('/order', [CustomerOrderController::class, 'store'])->name('order.store');
         // Route::get('/my-orders', [CustomerOrderController::class, 'index'])->name('orders.index');
+
+        Route::post('/order', [CustomerOrderController::class, 'store'])->name('order.store');
     });
 });

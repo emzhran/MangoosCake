@@ -14,6 +14,7 @@ class Order extends Model
         'cake_id',
         'tanggal_pemesanan',
         'jumlah_pemesanan',
+        'total_price',
         'catatan',
         'status',
     ];

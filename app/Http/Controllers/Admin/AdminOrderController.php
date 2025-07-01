@@ -15,9 +15,11 @@ class AdminOrderController extends Controller
     public function index(): View
     {
         $orders = Order::with(['user', 'cake'])->latest()->paginate(10);
-        return view('admin.datapesanan', compact('orders')); 
+        // PERBAIKAN: Sesuaikan nama view dengan nama file (P kapital)
+        return view('admin.dataPesanan', compact('orders')); 
     }
-      
+    
+    // ... sisa method lainnya tetap sama ...
     public function show(Order $order): View
     {
         $order->load(['user', 'cake']);
@@ -46,5 +48,17 @@ class AdminOrderController extends Controller
     {
         $order->delete();
         return redirect()->route('admin.data-pemesanan.index')->with('success', 'Pesanan berhasil dihapus!');
+    }
+
+    public function approve(Order $order): RedirectResponse
+    {
+        $order->update(['status' => 'completed']);
+        return redirect()->route('admin.data-pemesanan.index')->with('success', 'Pesanan berhasil di-approve (selesai).');
+    }
+
+    public function reject(Order $order): RedirectResponse
+    {
+        $order->update(['status' => 'cancelled']);
+        return redirect()->route('admin.data-pemesanan.index')->with('success', 'Pesanan berhasil di-reject (dibatalkan).');
     }
 }

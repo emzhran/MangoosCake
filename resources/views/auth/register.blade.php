@@ -296,7 +296,7 @@
                 Create your account
             </div>
 
-            <form method="POST" action="{{ route('register') }}">
+            <form method="POST" action="{{ route('register.submit') }}">
                 @csrf
                 
                 <div class="form-group">

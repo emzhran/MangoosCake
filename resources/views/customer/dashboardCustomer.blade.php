@@ -169,7 +169,7 @@
 
         .collections {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 24px;
             margin-top: 30px;
         }
@@ -370,13 +370,15 @@
 
     <section id="product-section">
         <h2 class="section-title">Our Collections</h2>
-        <div class="collections">
+       <div class="collections">
             @forelse ($cakes as $cake)
-            <div class="collection-item">
-                <img src="{{ asset('storage/' . $cake->cake_image) }}" alt="{{ $cake->nama_kue }}">
-                <div class="price">Rp {{ number_format($cake->harga_kue, 0, ',', '.') }}</div>
-                <a href="{{ route('customer.dashboard', ['cake' => $cake->id]) }}" class="order-button">Order Now</a>
-            </div>
+        <div class="collection-item">
+            <img src="{{ asset('storage/' . $cake->gambar_kue) }}" alt="{{ $cake->nama_kue }}">
+            
+            <div class="cake-name">{{ $cake->nama_kue }}</div> 
+            <div class="price">Rp {{ number_format($cake->harga_kue, 0, ',', '.') }}</div>
+            <a href="{{ route('customer.order.create', $cake->id) }}" class="order-button">Order Now</a>
+        </div>
             @empty
             <div style="grid-column: 1 / -1; text-align: center; color: var(--abu-gelap); font-size: 1.1em;">
                 Maaf, belum ada kue yang tersedia di koleksi saat ini.
