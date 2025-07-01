@@ -13,15 +13,15 @@
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
         <div class="bg-white p-6 rounded-xl shadow-md border border-orange-100">
             <h3 class="text-lg font-semibold text-gray-700">Total Pesanan</h3>
-            <p class="text-4xl font-bold text-yellow-500 mt-2">1,250</p>
+            <p class="text-4xl font-bold text-yellow-500 mt-2">{{ $totalOrders }}</p>
         </div>
         <div class="bg-white p-6 rounded-xl shadow-md border border-orange-100">
             <h3 class="text-lg font-semibold text-gray-700">Pendapatan Bulan Ini</h3>
-            <p class="text-4xl font-bold text-yellow-500 mt-2">Rp 8.75Jt</p>
+            <p class="text-4xl font-bold text-yellow-500 mt-2">Rp {{ number_format($monthlyRevenue, 0, ',', '.') }}</p>
         </div>
         <div class="bg-white p-6 rounded-xl shadow-md border border-orange-100">
             <h3 class="text-lg font-semibold text-gray-700">Produk Kue</h3>
-            <p class="text-4xl font-bold text-yellow-500 mt-2">25</p>
+            <p class="text-4xl font-bold text-yellow-500 mt-2">{{ $totalCakes }}</p>
         </div>
     </div>
 @endsection
