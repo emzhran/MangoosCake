@@ -45,7 +45,13 @@ Route::middleware('auth')->group(function () {
         
         // AKTIFKAN (UNCOMMENT) BARIS DI BAWAH INI
         Route::get('/order/create/{cake}', [CustomerOrderController::class, 'create'])->name('order.create');
+      
+         // Rute POST untuk menyimpan pesanan
+        Route::post('/order', [CustomerOrderController::class, 'store'])->name('order.store'); // <-- KINI MENGARAH KE CustomerOrderController
 
+        // Rute GET untuk menampilkan konfirmasi pesanan
+        Route::get('/order/confirmation/{orderId}', [CustomerOrderController::class, 'showOrderConfirmation'])->name('order.confirmation'); // <-- KINI MENGARAH KE CustomerOrderController
+        
         // Route::post('/order', [CustomerOrderController::class, 'store'])->name('order.store');
         // Route::get('/my-orders', [CustomerOrderController::class, 'index'])->name('orders.index');
 
