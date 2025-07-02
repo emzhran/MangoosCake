@@ -9,7 +9,11 @@
     <style>
         body { font-family: sans-serif; background-color: #f4f4f4; margin: 0; padding: 0; }
         header { background-color: #fff; padding: 20px 40px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-size: 24px; font-weight: bold; color: #333; }
+       .logo img {
+            height: 30px;
+            width: auto;
+            vertical-align: middle;
+        }
         .nav-links a { margin-left: 20px; text-decoration: none; color: #555; }
         .container { max-width: 900px; margin: 40px auto; background: #fff; padding: 40px; border-radius: 12px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
         .section-title { text-align: center; color: #333; margin-bottom: 30px; font-size: 28px; }
@@ -30,7 +34,9 @@
 </head>
 <body>
     <header>
-        <div class="logo">Mangoos.</div>
+         <div class="logo">
+        <img src="{{ asset('assets/logo1.png') }}" alt="Logo" class="h-12">
+    </div>
         <nav class="nav-links">
             <a href="{{ url('/') }}">Home</a>
             <a href="{{ url('/product') }}">Product</a>

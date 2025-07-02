@@ -78,8 +78,8 @@
 
         .login-image-section img {
             display: block;
-            width: 100%;
-            height: 100%;
+            width: 98%;
+            height: 98%;
         }
 
         .logo {
@@ -285,7 +285,7 @@
     <div class="login-container">
         <div class="login-form-section">
             <div class="logo">
-                <img src="{{ asset('assets/logo.png') }}" alt="Mangoos Logo">
+                <img src="{{ asset('assets/logo1.png') }}" alt="Mangoos Logo">
             </div>
             
             <div class="login-title">

@@ -268,7 +268,7 @@
     <div class="login-container">
         <div class="login-form-section">
             <div class="logo">
-                <img src="{{ asset('assets/logo.png') }}" alt="Mangoos Logo">
+                <img src="{{ asset('assets/logo1.png') }}" alt="Mangoos Logo">
             </div>
             
             <div class="login-title">

@@ -6,9 +6,9 @@
     <div class="flex justify-between items-center mb-6">
         <h1 class="text-3xl font-bold text-gray-800">Manajemen Data Kue</h1>
         {{-- Tombol ini mengarah ke halaman 'create' --}}
-        <a href="{{ route('admin.datakue.create') }}" class="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded-lg transition duration-300">
-            + Tambah Kue
-        </a>
+        <a href="{{ route('admin.datakue.create') }}" class="bg-[#960000] hover:bg-[#800000] text-white font-bold py-2 px-4 rounded-lg transition duration-300">
+    + Tambah Kue
+</a>
     </div>
 
     {{-- Komponen untuk menampilkan notifikasi sukses setelah create, update, atau delete --}}

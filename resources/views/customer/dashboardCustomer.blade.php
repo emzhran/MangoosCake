@@ -1,11 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mangoos Cake | Dashboard Pelanggan</title>
+    <title>Mangoos Cake | Dashboard</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lavishly+Yours&display=swap" rel="stylesheet">
     <style>
+        /* CSS Variables */
         :root {
             --merah-tua: #960000;
             --cream: #E3CC99;
@@ -13,12 +18,13 @@
             --abu-muda: #E6DCD0;
             --abu-gelap: #2A2929;
             --hitam: #000000;
-            --shadow-light: 0 2px 4px rgba(0,0,0,0.1);
-            --shadow-medium: 0 5px 15px rgba(0,0,0,0.1);
+            --shadow-light: 0 2px 4px rgba(0, 0, 0, 0.1);
+            --shadow-medium: 0 5px 15px rgba(0, 0, 0, 0.1);
             --border-radius: 12px;
             --transition: all 0.3s ease;
         }
 
+        /* Reset & Base Styles */
         * {
             margin: 0;
             padding: 0;
@@ -29,11 +35,16 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: var(--abu-muda);
             line-height: 1.6;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
         }
 
+        /* Class Font Kustom */
+        .cake-font {
+            font-family: 'Lavishly Yours', cursive;
+            font-size: 1.2em;
+            /* Sedikit lebih besar agar mudah dibaca */
+        }
+
+        /* Header Styles */
         header {
             background-color: var(--putih);
             display: flex;
@@ -46,10 +57,12 @@
             z-index: 100;
         }
 
-        .logo {
-            font-weight: bold;
-            font-size: 24px;
-            color: var(--merah-tua);
+        /* Letakkan CSS ini di dalam tag <style> Anda */
+
+        .logo img {
+            height: 30px;
+            width: auto;
+            vertical-align: middle;
         }
 
         nav {
@@ -69,22 +82,17 @@
             color: var(--merah-tua);
         }
 
+        /* Hero Section */
         .hero {
-            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
-                        url("{{ asset('assets/cake_bg.png') }}") center/cover;
-            height: 400px;
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+                url("{{ asset('assets/cake_bg.png') }}") center/cover;
+            height: 100vh;
             display: flex;
             align-items: center;
             justify-content: flex-start;
-            padding-left: 80px;
             color: var(--putih);
-        }
-
-        .hero-text {
-            background-color: rgba(0, 0, 0, 0.6);
-            padding: 30px;
-            border-radius: var(--border-radius);
-            backdrop-filter: blur(10px);
+            max-width: none;
+            padding: 60px 80px;
         }
 
         .hero-text h1 {
@@ -109,8 +117,6 @@
             font-weight: bold;
             font-size: 16px;
             transition: var(--transition);
-            display: inline-block;
-            text-decoration: none;
         }
 
         .btn-order:hover {
@@ -118,11 +124,11 @@
             transform: translateY(-2px);
         }
 
+        /* Section Styles */
         section {
             padding: 60px 80px;
             max-width: 1200px;
             margin: 0 auto;
-            flex-grow: 1; 
         }
 
         .section-title {
@@ -145,6 +151,7 @@
             background-color: var(--merah-tua);
         }
 
+        /* About Section */
         .about {
             display: flex;
             gap: 40px;
@@ -153,12 +160,15 @@
 
         .about img {
             width: 50%;
+            height: 350px;
+            object-fit: cover;
             border-radius: var(--border-radius);
             box-shadow: var(--shadow-medium);
         }
 
         .about-text {
             width: 50%;
+            /* Perbaikan typo dari 50%% */
         }
 
         .about-text p {
@@ -167,9 +177,10 @@
             text-align: justify;
         }
 
+        /* Collections */
         .collections {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 24px;
             margin-top: 30px;
         }
@@ -190,17 +201,10 @@
 
         .collection-item img {
             width: 100%;
-            height: 200px; 
+            height: 200px;
             object-fit: cover;
             border-radius: var(--border-radius);
             margin-bottom: 15px;
-        }
-
-        .collection-item .cake-name {
-            font-size: 1.25rem;
-            font-weight: bold;
-            color: var(--abu-gelap);
-            margin-bottom: 8px;
         }
 
         .collection-item .price {
@@ -210,7 +214,7 @@
             margin-bottom: 15px;
         }
 
-        .collection-item .order-button { 
+        .collection-item button {
             background: var(--merah-tua);
             border: none;
             color: var(--putih);
@@ -219,14 +223,13 @@
             cursor: pointer;
             font-weight: 600;
             transition: var(--transition);
-            text-decoration: none;
-            display: inline-block;
         }
 
-        .collection-item .order-button:hover {
+        .collection-item button:hover {
             background-color: #800000;
         }
 
+        /* Footer */
         footer {
             background-color: var(--putih);
             padding: 40px 80px;
@@ -236,7 +239,6 @@
             gap: 30px;
             font-size: 14px;
             color: var(--abu-gelap);
-            margin-top: auto;
         }
 
         footer h4 {
@@ -291,7 +293,8 @@
             }
 
             .hero {
-                padding-left: 20px;
+                padding: 40px 20px;
+                /* Adjust padding for mobile */
                 text-align: center;
                 justify-content: center;
             }
@@ -320,16 +323,17 @@
         }
     </style>
 </head>
+
 <body>
     <header>
-        <div class="logo">Mangoos.</div>
+        <div class="logo">
+            <img src="{{ asset('assets/logo1.png') }}" alt="Logo">
+        </div>
         <nav>
             <a href="{{ route('customer.dashboard') }}">Home</a>
             <a href="#product-section">Product</a>
             <a href="#about">About Us</a>
             <a href="#contact">Contact</a>
-            <a href="#"><i class="fas fa-user"></i></a> 
-            <a href="#"><i class="fas fa-shopping-bag"></i></a>
             <form action="{{ route('logout') }}" method="POST" class="inline-block" style="margin-left: 24px;">
                 @csrf
                 <button type="submit" style="background: none; border: none; color: var(--hitam); cursor: pointer; font-size: 16px; font-weight: 500; transition: var(--transition); padding: 0;">Logout</button>
@@ -340,11 +344,11 @@
     <section class="hero" id="home">
         <div class="hero-text">
             <h1>
-                <span style="color: var(--merah-tua);">BEST</span> Cake<br>
+                <span style="color: var(--merah-tua);">BEST</span> <span class="cake-font">Cake</span><br>
                 <span style="color: var(--cream);">BEST PRICE</span>
             </h1>
             <p>Taste Our Newest Cake Freshly From The Oven.</p>
-            <a href="#product-section" class="btn-order">Order Now</a> 
+            <button class="btn-order">Order Now</button>
         </div>
     </section>
 
@@ -354,35 +358,34 @@
             <img src="{{ asset('assets/about-us.png') }}" alt="About Mangoos Cake">
             <div class="about-text">
                 <p>
-                    Born from a love for baking and a desire to share moments of pure sweetness, 
-                    Mangoos started as a dream in a cozy kitchen. We believe that every cake tells 
+                    Born from a love for baking and a desire to share moments of pure sweetness,
+                    Mangoos started as a dream in a cozy kitchen. We believe that every cake tells
                     a story, and every bite should be a celebration of life's sweetest moments.
                 </p>
                 <p>
-                    Our passionate bakers use only the finest ingredients, combining traditional 
-                    techniques with modern flavors to create cakes that not only look stunning 
-                    but taste absolutely divine. From custom birthday cakes to elegant wedding 
+                    Our passionate bakers use only the finest ingredients, combining traditional
+                    techniques with modern flavors to create cakes that not only look stunning
+                    but taste absolutely divine. From custom birthday cakes to elegant wedding
                     centerpieces, we're here to make your special occasions even sweeter.
                 </p>
             </div>
         </div>
     </section>
-
     <section id="product-section">
         <h2 class="section-title">Our Collections</h2>
-       <div class="collections">
+        <div class="collections">
             @forelse ($cakes as $cake)
-        <div class="collection-item">
-            <img src="{{ asset('storage/' . $cake->gambar_kue) }}" alt="{{ $cake->nama_kue }}">
-            
-            <div class="cake-name">{{ $cake->nama_kue }}</div> 
-            <div class="price">Rp {{ number_format($cake->harga_kue, 0, ',', '.') }}</div>
-            <a href="{{ route('customer.order.create', $cake->id) }}" class="order-button">Order Now</a>
-        </div>
+                <div class="collection-item">
+                    <img src="{{ asset('storage/' . $cake->gambar_kue) }}" alt="{{ $cake->nama_kue }}">
+
+                    <div class="cake-name">{{ $cake->nama_kue }}</div>
+                    <div class="price">Rp {{ number_format($cake->harga_kue, 0, ',', '.') }}</div>
+                    <a href="{{ route('customer.order.create', $cake->id) }}" class="order-button">Order Now</a>
+                </div>
             @empty
-            <div style="grid-column: 1 / -1; text-align: center; color: var(--abu-gelap); font-size: 1.1em;">
-                Maaf, belum ada kue yang tersedia di koleksi saat ini.
-            </div>
+                <div style="grid-column: 1 / -1; text-align: center; color: var(--abu-gelap); font-size: 1.1em;">
+                    Maaf, belum ada kue yang tersedia di koleksi saat ini.
+                </div>
             @endforelse
         </div>
     </section>
@@ -423,4 +426,5 @@
         © 2025 Mangoos. All Rights Reserved.
     </div>
 </body>
+
 </html>

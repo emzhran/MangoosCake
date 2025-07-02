@@ -341,12 +341,19 @@
             font-size: 12px;
             color: #777;
         }
+        .logo img {
+            height: 30px;
+            width: auto;
+            vertical-align: middle;
+        }
 
     </style>
 </head>
 <body>
     <header>
-        <div class="logo">Mangoos.</div>
+         <div class="logo">
+        <img src="{{ asset('assets/logo1.png') }}" alt="Logo" class="h-12">
+    </div>
         <nav>
             <a href="{{ route('customer.dashboard') }}">Home</a>
             {{-- Anda bisa menyesuaikan link-link ini agar sesuai dengan id section di dashboard atau rute lain --}}
@@ -354,8 +361,6 @@
             <a href="{{ route('customer.dashboard') }}#about">About Us</a>
             <a href="{{ route('customer.dashboard') }}#contact">Contact</a>
             {{-- Ikon User dan Keranjang bisa ditambahkan di sini jika ada fungsionalitasnya --}}
-            <a href="#"><i class="fas fa-user"></i></a> 
-            <a href="#"><i class="fas fa-shopping-bag"></i></a>
             {{-- Form logout dari dashboard --}}
             <form action="{{ route('logout') }}" method="POST" class="inline-block" style="margin-left: 24px;">
                 @csrf
