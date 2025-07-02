@@ -69,8 +69,12 @@
                 </div>
                 <div class="order-item-detail">
                     <span>Kuantitas:</span>
-                    <span>{{ $order->quantity }}</span>
+                    <span>{{ $order->jumlah_pemesanan }}</span>
                 </div>
+                <div class="order-item-detail">
+                    <span>Tanggal Pesanan:</span>
+                    <span>{{ \Carbon\Carbon::parse($order->tanggal_pemesanan)->translatedFormat('d M Y, H:i') }}</span>
+                    </div>
                 <div class="order-item-detail">
                     <span>Status Pesanan:</span>
                     <span style="text-transform: capitalize;">{{ $order->status }}</span>
