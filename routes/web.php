@@ -34,7 +34,10 @@ Route::middleware('auth')->group(function () {
         // Route untuk CRUD Kue (Data Kue)
         Route::resource('datakue', CakeController::class);
 
-        Route::resource('data-pemesanan', AdminOrderController::class)->except(['create', 'store']);
+        // Kode Perbaikan
+        Route::resource('data-pemesanan', AdminOrderController::class)
+            ->parameters(['data-pemesanan' => 'order']) // <-- TAMBAHKAN INI
+            ->except(['create', 'store']);
 
         Route::post('data-pemesanan/{order}/approve', [AdminOrderController::class, 'approve'])->name('data-pemesanan.approve');
         Route::post('data-pemesanan/{order}/reject', [AdminOrderController::class, 'reject'])->name('data-pemesanan.reject');
